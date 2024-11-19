@@ -43,3 +43,20 @@ def get_hash(to_hash):
 # Hash each individual password and compare it against the stored hash.
 # - When you find the match, print the plaintext version of the password.
 # - End your loop.
+
+try:
+    with open('hash') as h:
+        hashVar = h.read()
+    with open('rockyou.txt') as f:
+        for line in f.readlines():
+            line = line.rstrip("\n")
+            tempHash = getHash(line)
+            if tempHash in hashVar:
+                print(line)
+                break
+except FileNotFoundError as e:
+    print(f"File not found: {e.filename}")
+except PermissionError as e:
+    print(f"Permission denied: {e.filename}")
+except Exception as e:
+    print(f"An error occurred: {e}")
